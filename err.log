@@ -1,0 +1,6 @@
+begin==========2018-11-05 16:40:21==========
+错误的编码是：42S02
+出错的行号：35行
+出错的文件路径：F:\home\class\day25\code\blog33\core\Model.class.php
+错误的信息是：SQLSTATE[42S02]: Base table or view not found: 1146 Table 'db7.user' doesn't exist
+end===================================

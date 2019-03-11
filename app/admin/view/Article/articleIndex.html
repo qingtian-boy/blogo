@@ -1,0 +1,122 @@
+{include file="Common/head.html"}
+<body>
+<div class="wrapper">
+    <!-- START HEADER -->
+    {include file="Common/bodyhead.html"}
+    <!-- END HEADER -->
+
+    <!-- START MAIN -->
+    <div id="main">
+        <!-- START SIDEBAR -->
+        {include file="Common/sidebar.html"}
+        <!-- END SIDEBAR -->
+
+        <!-- START PAGE -->
+        <div id="page">
+            <!-- start page title -->
+            <div class="page-title">
+                <div class="in">
+                    <div class="titlebar">	<h2>博文管理</h2>	<p>博文列表</p></div>
+
+                    <div class="clear"></div>
+                </div>
+            </div>
+            <!-- end page title -->
+
+            <!-- START CONTENT -->
+            <div class="content">
+                <div class="simplebox grid740" style="z-index: 720;">
+                    <div class="titleh" style="z-index: 710;">
+                        <h3>搜索</h3>
+                    </div>
+                    <div class="body" style="z-index: 690;">
+                        <form id="form2" name="form2" method="post" action="{C('domain.main')}/index.php?p=admin&m=article&a=lis">
+                            <div class="st-form-line" style="z-index: 680;">
+                                <span class="st-labeltext">标题</span>
+                                <input name="s_title" type="text" class="st-forminput" style="width:510px" value="{$s_title}">
+                                <div class="clear" style="z-index: 670;"></div>
+                            </div>
+                            <div class="st-form-line" style="z-index: 640;">
+                                <span class="st-labeltext">分类</span>
+                                <select class="uniform" name="s_cat_id">
+									<option value="0">任意</option>
+									{foreach $cats as $cats_val}
+                                    <option value="{$cats_val.id}" {if $s_cat_id==$cats_val.id}selected{/if}>{str_repeat('-- ', $cats_val.space)}{$cats_val.name}</option>
+									{/foreach}
+                                </select>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="button-box" style="z-index: 460;">
+                                <input type="submit" id="button" value="提交" class="st-button">
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
+                <!-- START TABLE -->
+                <div class="simplebox grid740">
+
+                    <div class="titleh">
+                        <h3>博文列表</h3>
+                    </div>
+
+                    <table id="myTable" class="tablesorter">
+                        <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>id</th>
+                            <th>所属分类</th>
+                            <th>标题</th>
+                            <th>简介</th>
+                            <th>发布日期</th>
+                            <th>发布者昵称</th>
+                            <th>评论数量</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+						{foreach $articles as $articles_key=>$articles_val}
+						<tr>
+                            <td>{$articles_key+1}</td>
+                            <td>{$articles_val.id}</td>
+                            <td>{$articles_val.cat_name}</td>
+                            <td>{$articles_val.title}</td>
+                            <td>{$articles_val.intro}</td>
+                            <td>{date('Y-m-d H:i:s', $articles_val.pubtime)}</td>
+                            <td>{$articles_val.user_nickname}</td>
+                            <td>{$articles_val.comment_num}</td>
+                            <td>
+								 <a href="#" >编辑</a>
+                                <a href="#" onClick="return confirm('是否确认删除文章：口味蛙？');">删除</a>
+                            </td>
+                        </tr>
+						{/foreach}
+                        </tbody>
+                    </table>
+                    <ul class="pagination">
+                         <!-- <li><a href='#'>1</a></li> -->
+						 <!-- <li><a href='#'>2</a></li> -->
+						 <!-- <li><a href='#'>3</a></li> -->
+						 <!-- <li><a href='#'>4</a></li> -->
+						 <!-- <li><a href='#'>下一页</a></li> -->
+						 {$pageHtml}
+                    </ul>
+                </div>
+                <!-- END TABLE -->
+            </div>
+            <!-- END CONTENT -->
+        </div>
+        <!-- END PAGE -->
+        <div class="clear"></div>
+    </div>
+    <!-- END MAIN -->
+
+    <!-- START FOOTER -->
+    <div id="footer">
+    	<div class="left-column">© Copyright 2016 - 保留所有权利.</div>
+    </div>
+    <!-- END FOOTER -->
+</div>
+</body>
+</html>
